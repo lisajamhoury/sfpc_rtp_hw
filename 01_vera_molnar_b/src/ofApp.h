@@ -23,8 +23,8 @@ class ofApp : public ofBaseApp{
         void takeScreenShot(float imgW, float imgH);
         
         bool imageTaken;
-        float width;
-        float height;
-            
+        float canvasWidth;
+        float canvasHeight;
+    
 };
 
