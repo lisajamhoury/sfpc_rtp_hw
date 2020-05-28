@@ -18,7 +18,7 @@ class Shape {
     public: // place public functions or variables declarations here
 
     // methods, equivalent to specific functions of your class objects
-    void setup(float _x, float _y, float _w, float _h, string _side, bool _ctr, ofVec4f _pVerts);
+    void setup(float _x, float _y, float _w, float _h, string _side, bool _ctr, ofVec4f _pVerts, float _rXOff, float _rYOff, float _rHOff);
     // setup method, use this to setup your object's initial state
     void update();  // update method, used to refresh your objects properties
     void draw();    // draw method, this where you'll do the object's drawing
@@ -31,6 +31,10 @@ class Shape {
     
     float w;
     float h;
+    
+    float rXOff;
+    float rYOff;
+    float rHOff;
     
     string side;
     

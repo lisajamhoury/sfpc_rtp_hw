@@ -13,7 +13,7 @@
 Shape::Shape() {
 }
 
-void Shape::setup(float _x, float _y, float _w, float _h, string _side, bool _ctr, ofVec4f _pVerts) {
+void Shape::setup(float _x, float _y, float _w, float _h, string _side, bool _ctr, ofVec4f _pVerts, float _rXOff, float _rYOff, float _rHOff) {
     x = _x;
     y = _y;
     
@@ -26,13 +26,17 @@ void Shape::setup(float _x, float _y, float _w, float _h, string _side, bool _ct
     center = _ctr;
     prevVerts = _pVerts;
     
+    rXOff = _rXOff;
+    rYOff = _rYOff;
+    rHOff = _rHOff;
+    
     createVerts();
     
 }
 
 ofColor Shape::setColor() {
-    ofColor leftClr(169,15,19);
-    ofColor rightClr(50,5,8);
+    ofColor leftClr(184,18,24);
+    ofColor rightClr(59,6,9);
     
     // If X is on left
     if (side == "L") {
@@ -43,7 +47,15 @@ ofColor Shape::setColor() {
 }
 
 void Shape::createVerts() {
-    float defaultRXOffset = 4.9;
+    float defaultRXOffset = rXOff; // 4.9 rXOff
+    float yOffThresh = rYOff; // rYOff 0.32
+    float rHOffset = ofRandom(rHOff); // 0.10 rHOff;
+
+
+//    std::cout << rYOff << rXOff << endl;
+//    std::cout << rXOff << ", " << rYOff << ", " << rHOff << endl;
+
+    
     float rXOffsetMin;
     float rXOffsetMax;
     
@@ -70,10 +82,12 @@ void Shape::createVerts() {
     
     //Threshold for Y variance
     //float yOffThresh = ofMap(mouseX, 0, width, 0.0, 0.5);
-    float yOffThresh = 0.32;
+    
+//    std::cout << rYOff << endl;
+    
+    
     //std::cout << yOffThresh << endl;
     // random H offset changes height of shape randomly
-    float rHOffset;
     
     // If X is on left
     if (side == "L") {
@@ -81,13 +95,6 @@ void Shape::createVerts() {
     } else {
         rYOffset = ofRandom(yOffThresh*h, 2*yOffThresh*h);
     }
-    
-//    // If y is on the top half
-//    if (y < height/2) {
-//    //rYOffset *=-1;
-//    }
-    
-    rHOffset = ofRandom(0.10);
 
     v1 = ofVec2f(x+ofRandom(-rXOffsetMin,rXOffsetMax), y-rYOffset);
     v2 = ofVec2f(x+ofRandom(-rXOffsetMin,rXOffsetMax)+w, y-rYOffset);

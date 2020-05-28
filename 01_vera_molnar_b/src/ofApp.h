@@ -1,6 +1,8 @@
 #pragma once
 
 #include "ofMain.h"
+#include "ofxGui.h"
+
 
 class ofApp : public ofBaseApp{
 
@@ -25,6 +27,29 @@ class ofApp : public ofBaseApp{
         bool imageTaken;
         float canvasWidth;
         float canvasHeight;
+    
+//        void circleResolutionChanged(int & circleResolution);
+//        void ringButtonPressed();
+
+        bool bHide;
+
+        ofxFloatSlider multX;
+        ofxFloatSlider multY;
+        ofxFloatSlider canvasHAmt;
+        ofxFloatSlider rXOffs;
+        ofxFloatSlider rYOffs;
+        ofxFloatSlider rHOffs;
+    
+    
+        ofxColorSlider color;
+        ofxVec2Slider center;
+        ofxIntSlider circleResolution;
+        ofxToggle filled;
+        ofxButton twoCircles;
+        ofxButton ringButton;
+        ofxLabel screenSize;
+
+        ofxPanel gui;
     
 };
 
