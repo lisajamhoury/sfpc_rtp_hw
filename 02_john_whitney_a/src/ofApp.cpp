@@ -25,7 +25,6 @@ void ofApp::setup(){
     state = 0;
     
     // create lines
-    
     float angleOffset = TWO_PI/(numLines * 2);
     
     for (int i = 0; i < numLines; i++) {
@@ -34,15 +33,12 @@ void ofApp::setup(){
         ofColor clr;
         int group;
         
-        
         if (i < numLines/2) {
-            
             // pink
             clr = ofColor(213, 150, 154);
             group = 1;
 
         } else {
-            
             // white
             clr = ofColor(223, 215, 197);
             group = 2;
@@ -66,7 +62,6 @@ void ofApp::setup(){
         float x2 = xorig2 + radius2 * cos(angle2);
         float y2 = yorig2 + radius2 * sin(angle2);
         
-        
         WLine line;
         line.setup(xorig1,yorig1, xorig2, yorig2, x1, y1, x2, y2, radius1, radius2, angle, clr, group);
         
@@ -88,12 +83,12 @@ void ofApp::setup(){
 //--------------------------------------------------------------
 void ofApp::update(){
     
-    
+    // change states every three seconds
     if (ofGetFrameNum() - timer == 180.0) {
         timer = ofGetFrameNum();
                 
         if (state == 3) {
-//            state = 0;
+            state = 0;
         } else {
             state++;
         }
@@ -102,20 +97,12 @@ void ofApp::update(){
             lines1[i].updateState(state);
             lines2[i].updateState(state);
         }
-        
     }
     
     for (int i = 0; i < numLines/2; i++) {
         lines1[i].update();
-        
-    }
-
-    for (int i = 0; i < numLines/2; i++) {
-        
         lines2[i].update();
     }
-
-    
     
     if (!imageTaken) {
         ofImage image;
@@ -132,15 +119,15 @@ void ofApp::update(){
 void ofApp::draw(){
 
     ofBackground(4,18,26);
-//    baseImg.draw(0,0, ofGetWidth(), ofGetHeight());
+    
+    // debug image
+    // baseImg.draw(0,0, ofGetWidth(), ofGetHeight());
     
     for (int i = 0; i < numLines/2; i++) {
         lines1[i].draw();
-     
     }
     
     for (int i = 0; i < numLines/2; i++) {
-     
         lines2[i].draw();
     }
     
@@ -154,6 +141,7 @@ void ofApp::keyPressed(int key){
         std::cout << "return pressed" << endl;
     }
     
+    // advance state
     if (key == OF_KEY_RIGHT) {
         state++;
 
@@ -163,6 +151,7 @@ void ofApp::keyPressed(int key){
         }
     }
     
+    // reset program
     if (key == OF_KEY_LEFT) {
         timer = ofGetFrameNum();
 
@@ -171,8 +160,6 @@ void ofApp::keyPressed(int key){
             lines1[i].updateState(state);
             lines2[i].updateState(state);
         }
-//        state =  1;
-        
     }
 }
 

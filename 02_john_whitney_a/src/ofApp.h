@@ -42,7 +42,6 @@ class ofApp : public ofBaseApp{
         ofxIntSlider lineW;
 
         ofxPanel gui;
-        
     
         WLine lines1[30];
         WLine lines2[30];
