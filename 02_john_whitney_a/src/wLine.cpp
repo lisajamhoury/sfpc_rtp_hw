@@ -42,7 +42,7 @@ void WLine::setup(float _xO1, float _yO1, float _xO2, float _yO2, float _x1, flo
     clr = _clr;
     group = _group;
     
-    state = 1;
+    state = 0;
     
     pathAngle = 0;
 }
@@ -74,7 +74,7 @@ void WLine::update(){
         x2 = xO2 + rad2 * cos(angle2);
         y2 = yO2 + rad2 * sin(angle2);
         
-        state = 1;
+//        state = 1;
            
     }
     
@@ -83,8 +83,8 @@ void WLine::update(){
         // change in radius 89
         // over 3 seconds at 60 fps -- 180
         float radChange = 89.0/180.0;
-        float x1Change = -310.0/180.0;
-        float x2Change = -43.0/180.0;
+//        float xO1Change = -310.0/180.0;
+        float xO2Change = -43.0/180.0;
         float angleChange = PI/180.0;
         
         float xOSmPath = 383.0;
@@ -95,9 +95,9 @@ void WLine::update(){
         rad2 -= radChange;
 
         // center of circle x
-        // moves to left
-        xO1 += x1Change;
-        xO2 += x2Change;
+//        // moves to left
+//        xO1 += x1Change;
+        xO2 += xO2Change;
 
         
         // group 1 starts at bottom
@@ -130,6 +130,62 @@ void WLine::update(){
         y2 = yO2 + rad2 * sin(angle2);
         
     }
+    
+    
+     if (state == 2) {
+//         cout << "state 2" << endl;
+         
+         // change in radius 89
+         // over 3 seconds at 60 fps -- 180
+         float radChange = 89.0/180.0;
+    //   float xO1Change = (92.0+43.0)/180.0;
+    //   float xO2Change = -43.0/180.0;
+         float angleChange = PI/180.0;
+            
+         float xOSmPath = 274.0;//295.5;
+         float yOSmPath = 223.0;
+         float radSmPath = 46.0; // 67.5;
+    //
+                    
+         rad1 += radChange;
+         rad2 -= radChange;
+
+            // center of circle x
+            // moves to left
+//            xO1 += xO1Change;
+//            xO2 += xO2Change;
+
+            
+            // group 1 starts at bottom
+            if (group == 1) {
+    //            yO1 += 1;
+                angle1 += angleChange;
+                angle2 -= angleChange;
+                pathAngle+=angleChange;
+    //            clr = ofColor(0,255,0);
+
+            } else {
+    //            yO1 -= 1;
+                angle1 -= angleChange;
+                angle2 += angleChange;
+                pathAngle-=angleChange;
+
+            }
+
+            xO1 = xOSmPath + radSmPath * cos(pathAngle);
+            yO1 = yOSmPath + radSmPath * sin(pathAngle);
+            
+
+            // point on small circle
+            x1 = xO1 + rad1 * cos(angle1);
+            y1 = yO1 + rad1 * sin(angle1);
+
+            // point on large circle
+            
+            x2 = xO2 + rad2 * cos(angle2);
+            y2 = yO2 + rad2 * sin(angle2);
+            
+        }
 }
 
 void WLine::draw(){
@@ -137,13 +193,13 @@ void WLine::draw(){
     ofSetColor(clr);
     ofSetLineWidth(3.0);
     
-//
     ofDrawCircle(x1, y1, 1.0);
-//
+    ofDrawCircle(x2, y2, 1.0);
+    ofDrawLine(x1, y1, x2, y2);
+
+    // debug line
 //    ofSetColor(0,255,0);
 //    ofSetLineWidth(1.0);
 //    ofDrawLine(0, yO1, ofGetWidth(), yO1);
-    ofDrawCircle(x2, y2, 1.0);
-    ofDrawLine(x1, y1, x2, y2);
     
 }

@@ -22,7 +22,7 @@ void ofApp::setup(){
     bHide = false;
     
     timer = 0.0;
-    state = 1;
+    state = 0;
     
     // create lines
     
@@ -87,6 +87,7 @@ void ofApp::setup(){
 
 //--------------------------------------------------------------
 void ofApp::update(){
+    
     
     if (ofGetFrameNum() - timer == 180.0) {
         timer = ofGetFrameNum();
