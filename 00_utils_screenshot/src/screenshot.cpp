@@ -13,6 +13,7 @@ screenshotUtil::screenshotUtil() {
 
 void screenshotUtil::run() {
     
+    // take screenshot on first frame only
     if (!imageTaken) {
         take();
         imageTaken = true;
