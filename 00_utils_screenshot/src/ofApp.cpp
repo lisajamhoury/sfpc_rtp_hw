@@ -1,5 +1,4 @@
 #include "ofApp.h"
-#include "screenshot.hpp"
 
 //--------------------------------------------------------------
 void ofApp::setup(){
