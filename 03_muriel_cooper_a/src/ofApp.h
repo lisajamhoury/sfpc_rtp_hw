@@ -33,5 +33,7 @@ public:
     ofColor typeClr3;
     
     ofImage debugImg;
+    ofFbo fbo;
+
     
 };
