@@ -40,14 +40,14 @@ void ofApp::draw(){
 //        img2.draw(100,100);//green image
 //    ofDisableAlphaBlending();
     
-//        ofBackground(230); // this matters
-//    img1.draw(0,0);//red image
-//    img2.draw(100,100);//green image
-
-            ofBackground(0); // this matters
-        ofEnableBlendMode(OF_BLENDMODE_ADD);
-        img1.draw(0,0);//red image
-        img2.draw(100,100);//green image
+    ofBackground(230); // this matters
+    img1.draw(0,0);//red image
+    img2.draw(100,100);//green image
+    
+    //            ofBackground(0); // this matters
+    ofEnableBlendMode(OF_BLENDMODE_MULTIPLY);
+    img1.draw(0,0);//red image
+    img2.draw(100,100);//green image
     ofDisableAlphaBlending();
 }
 

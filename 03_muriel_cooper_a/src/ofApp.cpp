@@ -3,6 +3,7 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
     font.load("helvetica-bold.ttf", 72, true, true, true);
+
     font.setLetterSpacing(0.83);
     debugImg.load("images/smpImgs/03_muriel_cooper_og.jpg");
 
@@ -11,8 +12,7 @@ void ofApp::setup(){
     typeClr3 = ofColor(54, 20, 65); // purple
     typeClr2 = ofColor(1, 74, 24); // green
     typeClr1 = ofColor(205, 43, 22); // red
-
-
+    
 }
 
 //--------------------------------------------------------------
@@ -32,11 +32,6 @@ void ofApp::draw(){
     font.setLineHeight(lh);
 
     ofBackground(squareClr);
-//    ofBackground(255);
-    
-
-    
-//    ofTranslate(300,300);
     
     // back ground image
 //    ofPushMatrix();
@@ -49,96 +44,66 @@ void ofApp::draw(){
     
     // create grid
     
-    ofSetColor(0, 255, 0);
-    ofNoFill();
-    
-    float numRows = 10.0;
-    float rectW = ofGetWidth()/numRows;
-
-    
-    // columns
-    for (int i = 0; i < numRows; i++) {
-        ofDrawRectangle(i*rectW, 0, rectW, ofGetHeight());
-    }
-    
-    // rows
-    for (int i = 0; i < numRows; i++) {
-        float rectW = ofGetWidth()/numRows;
-        ofDrawRectangle(0, i*rectW, ofGetWidth(), rectW);
-    }
-    
+//    ofSetColor(0, 255, 0);
+//    ofNoFill();
+//
+//    float numRows = 10.0;
+//    float rectW = ofGetWidth()/numRows;
+//
+//
+//    // columns
+//    for (int i = 0; i < numRows; i++) {
+//        ofDrawRectangle(i*rectW, 0, rectW, ofGetHeight());
+//    }
+//
+//    // rows
+//    for (int i = 0; i < numRows; i++) {
+//        float rectW = ofGetWidth()/numRows;
+//        ofDrawRectangle(0, i*rectW, ofGetWidth(), rectW);
+//    }
+//
     
     float yOff = 6.375;
-//    float trans = ofMap(mouseX, 0, ofGetWidth(), 0, 255);
-    float trans = 255;
+//    float alpha = ofMap(mouseX, 0, ofGetWidth(), 0, 255);
+    float alpha = 255;
     
+    ofEnableAlphaBlending();
     ofEnableBlendMode(OF_BLENDMODE_ADD);
     
-    ofSetColor(typeClr3, trans);
+    ofSetColor(typeClr3, alpha);
     
     ofPushMatrix();
     ofTranslate(ofGetWidth()/2, ofGetHeight()/2);
     ofRotateDeg(180);
-    font.drawString("MESSAGES", 326-ofGetWidth()/2, 556-ofGetHeight()/2+yOff);
-    font.drawString("MEANS", 579-ofGetWidth()/2, 462-ofGetHeight()/2+yOff);
+    font.drawStringAsShapes("MESSAGES", 326-ofGetWidth()/2, 556-ofGetHeight()/2+yOff);
+    font.drawStringAsShapes("MEANS", 579-ofGetWidth()/2, 462-ofGetHeight()/2+yOff);
     
-    font.drawString("MESSAGES", -38-ofGetWidth()/2, 394-ofGetHeight()/2+yOff);
-    font.drawString("MEANS", 19-ofGetWidth()/2, 302-ofGetHeight()/2+yOff);
+    font.drawStringAsShapes("MESSAGES", -38-ofGetWidth()/2, 394-ofGetHeight()/2+yOff);
+    font.drawStringAsShapes("MEANS", 19-ofGetWidth()/2, 302-ofGetHeight()/2+yOff);
     ofPopMatrix();
     
-    ofSetColor(typeClr2, trans);
+    ofSetColor(typeClr2, alpha);
 
     ofPushMatrix();
     ofTranslate(ofGetWidth()/2, ofGetHeight()/2);
     ofRotateDeg(90);
-    font.drawString("MESSAGES", 326-ofGetWidth()/2, 556-ofGetHeight()/2+yOff);
-    font.drawString("MEANS", 579-ofGetWidth()/2, 462-ofGetHeight()/2+yOff);
+    font.drawStringAsShapes("MESSAGES", 326-ofGetWidth()/2, 556-ofGetHeight()/2+yOff);
+    font.drawStringAsShapes("MEANS", 579-ofGetWidth()/2, 462-ofGetHeight()/2+yOff);
 
-    font.drawString("MESSAGES", -38-ofGetWidth()/2, 394-ofGetHeight()/2+yOff);
-    font.drawString("MEANS", 19-ofGetWidth()/2, 302-ofGetHeight()/2+yOff);
+    font.drawStringAsShapes("MESSAGES", -38-ofGetWidth()/2, 394-ofGetHeight()/2+yOff);
+    font.drawStringAsShapes("MEANS", 19-ofGetWidth()/2, 302-ofGetHeight()/2+yOff);
     ofPopMatrix();
     
-    ofSetColor(typeClr1, trans);
+    ofSetColor(typeClr1, alpha);
 //    font.drawString("MESSAGES", 4.0* rectW, 7.0*rectW);
-    font.drawString("MESSAGES", 326, 556+yOff);
-    font.drawString("MEANS", 579, 462+yOff);
+    font.drawStringAsShapes("MESSAGES", 326, 556+yOff);
+    font.drawStringAsShapes("MEANS", 579, 462+yOff);
     ofFill();
 
-    font.drawString("MESSAGES", -38, 394+yOff);
-    font.drawString("MEANS", 19, 302+yOff);
+    font.drawStringAsShapes("MESSAGES", -38, 394+yOff);
+    font.drawStringAsShapes("MEANS", 19, 302+yOff);
 
     ofDisableBlendMode();
-
-
-    
-
-
-//    cout << mouseX << ", " << mouseY << endl;
-    
-    
-//    vector < ofPath > paths = font.getStringAsPoints("MESSAGES");
-
-//    for (int i = 0; i < paths.size(); i++){
-//        paths[i].setPolyWindingMode(OF_POLY_WINDING_ODD);
-//        vector < ofPolyline > lines = paths[i].getOutline();
-//        for (int j = 0; j < lines.size(); j++){
-//
-//            lines[j].setClosed(true);
-//            lines[j] = lines[j].getResampledBySpacing(3);
-//
-//            for (int k = 0; k < lines[j].size(); k++){
-//                lines[j][k].x += mouseX * sin(lines[j][k].y * 0.04 + ofGetElapsedTimef() + i);
-//            }
-//
-//            lines[j].draw();
-//
-//        }
-//        paths[i].close();
-//        paths[i].simplify();
-//        paths[i].draw();
-//    }
-//
-    
     
     // build frame
      ofSetColor(borderClr);
