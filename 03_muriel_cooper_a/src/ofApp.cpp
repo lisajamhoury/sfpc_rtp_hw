@@ -15,7 +15,7 @@ void ofApp::setup(){
     typeClr1 = ofColor(229, 52, 31); // red
     
     // FBO to blend type
-    fbo.allocate(800, 800, GL_RGBA);
+    fbo.allocate(800, 800, GL_RGBA, 4);
     
     
     // useful if fbo is bigger than canvas
@@ -29,18 +29,23 @@ void ofApp::setup(){
     
     // draw to fbo
     fbo.begin();
+//        ofClear(0,0,0,0);
         ofEnableAlphaBlending();
-        ofEnableBlendMode(OF_BLENDMODE_MULTIPLY);
+        ofEnableBlendMode(OF_BLENDMODE_ADD);
         
         // purple text
         ofSetColor(typeClr3, alpha);
         ofPushMatrix();
         ofTranslate(fbo.getWidth()/2, fbo.getHeight()/2);
         ofRotateDeg(180-45);
+    
+    for (int i = 0; i < 2; i++){
         font.drawStringAsShapes("MESSAGES", 326 * canvRatio-fbo.getWidth()/2, 556 * canvRatio-fbo.getHeight()/2+yOff);
         font.drawStringAsShapes("MEANS", 579 * canvRatio-fbo.getWidth()/2, 462 * canvRatio-fbo.getHeight()/2+yOff);
         font.drawStringAsShapes("MESSAGES", -48 * canvRatio-fbo.getWidth()/2, 394 * canvRatio-fbo.getHeight()/2+yOff);
         font.drawStringAsShapes("MEANS", 9 * canvRatio-fbo.getWidth()/2, 302 * canvRatio-fbo.getHeight()/2+yOff);
+    }
+    
         ofPopMatrix();
         
         // green text
@@ -48,10 +53,15 @@ void ofApp::setup(){
         ofPushMatrix();
         ofTranslate(fbo.getWidth()/2, fbo.getHeight()/2);
         ofRotateDeg(90-45);
+    
+    for (int i = 0; i < 2; i++){
         font.drawStringAsShapes("MESSAGES", 326 * canvRatio-fbo.getWidth()/2, 556 * canvRatio-fbo.getHeight()/2+yOff);
         font.drawStringAsShapes("MEANS", 579 * canvRatio-fbo.getWidth()/2, 462 * canvRatio-fbo.getHeight()/2+yOff);
         font.drawStringAsShapes("MESSAGES", -48 * canvRatio-fbo.getWidth()/2, 394 * canvRatio-fbo.getHeight()/2+yOff);
         font.drawStringAsShapes("MEANS", 9 * canvRatio-fbo.getWidth()/2, 302 * canvRatio-fbo.getHeight()/2+yOff);
+    
+        }
+    
         ofPopMatrix();
         
         // red text
@@ -59,14 +69,19 @@ void ofApp::setup(){
         ofPushMatrix();
         ofTranslate(fbo.getWidth()/2, fbo.getHeight()/2);
         ofRotateDeg(-45);
+    
+    for (int i = 0; i < 2; i++){
         font.drawStringAsShapes("MESSAGES", 326 * canvRatio - fbo.getWidth()/2, 556 * canvRatio-fbo.getHeight()/2+yOff);
         font.drawStringAsShapes("MEANS", 579 * canvRatio - fbo.getWidth()/2, 462 * canvRatio-fbo.getHeight()/2+yOff);
         font.drawStringAsShapes("MESSAGES", -48 * canvRatio - fbo.getWidth()/2, 394 * canvRatio-fbo.getHeight()/2+yOff);
         font.drawStringAsShapes("MEANS", 9 * canvRatio - fbo.getWidth()/2, 302 * canvRatio-fbo.getHeight()/2+yOff);
-        ofPopMatrix();
+    }
+    
+    ofPopMatrix();
         
         ofDisableBlendMode();
     
+//    ofClearAlpha();
     fbo.end();
     
     
@@ -80,38 +95,56 @@ void ofApp::update(){
 //--------------------------------------------------------------
 void ofApp::draw(){
     
-    //    float amt = ofMap(mouseX, 0, ofGetWidth(), 0.7, 1.0);
-    //    float numRows = ofMap(mouseX, 0, ofGetWidth(), 1.0, 20.0);
-    //    float ls = ofMap(mouseX, 0, ofGetWidth(), 0.0, 2.0);
-    //    float yOff = ofMap(mouseX, 0, ofGetWidth(), 0, 300.0);
-    //    float lh = ofMap(mouseX, 0, ofGetWidth(), 0.0, 2.0);
-    //    font.setLineHeight(lh);
-    
-    // back ground image for debug
-    //    ofPushMatrix();
-    //    ofTranslate(ofGetWidth()/2, ofGetHeight()/2);
-    //    ofRotateDeg(45);
-    //
-    //    debugImg.draw(-ofGetWidth()/2, -ofGetHeight()/2, ofGetWidth(), ofGetHeight());
-    //    ofPopMatrix();
-    
-    // set bg color
+//        ofBackground(ofColor::green);
     ofBackground(squareClr);
+    //
     
-    // draw fbo
-    ofPushMatrix();
-        ofTranslate(ofGetWidth()/2, ofGetHeight()/2);
-        fbo.draw(-ofGetWidth()/2,-ofGetHeight()/2);
-    ofPopMatrix();
+    ofSetColor(255);
+    fbo.draw(0,0);
     
-    // build frame
-    ofSetColor(borderClr);
-    float borderW = ofGetWidth() * (2.0/30.0);
-    ofDrawRectangle(0, 0, ofGetWidth(), borderW);
-    ofDrawRectangle(0, ofGetHeight()-borderW, ofGetWidth(), ofGetHeight());
-    ofDrawRectangle(0, borderW, borderW, ofGetHeight()-borderW);
-    ofDrawRectangle(ofGetWidth()-borderW, borderW, borderW, ofGetHeight()-borderW);
+    //    // build frame
+        ofSetColor(borderClr);
+        float borderW = ofGetWidth() * (2.0/30.0);
+        ofDrawRectangle(0, 0, ofGetWidth(), borderW);
+        ofDrawRectangle(0, ofGetHeight()-borderW, ofGetWidth(), ofGetHeight());
+        ofDrawRectangle(0, borderW, borderW, ofGetHeight()-borderW);
+        ofDrawRectangle(ofGetWidth()-borderW, borderW, borderW, ofGetHeight()-borderW);
     
+    
+//
+//    //    float amt = ofMap(mouseX, 0, ofGetWidth(), 0.7, 1.0);
+//    //    float numRows = ofMap(mouseX, 0, ofGetWidth(), 1.0, 20.0);
+//    //    float ls = ofMap(mouseX, 0, ofGetWidth(), 0.0, 2.0);
+//    //    float yOff = ofMap(mouseX, 0, ofGetWidth(), 0, 300.0);
+//    //    float lh = ofMap(mouseX, 0, ofGetWidth(), 0.0, 2.0);
+//    //    font.setLineHeight(lh);
+//
+//    // back ground image for debug
+//    //    ofPushMatrix();
+//    //    ofTranslate(ofGetWidth()/2, ofGetHeight()/2);
+//    //    ofRotateDeg(45);
+//    //
+//    //    debugImg.draw(-ofGetWidth()/2, -ofGetHeight()/2, ofGetWidth(), ofGetHeight());
+//    //    ofPopMatrix();
+//
+//    // set bg color
+//    ofBackground(squareClr);
+//
+//    ofSetColor(255);
+//    // draw fbo
+//    ofPushMatrix();
+//        ofTranslate(ofGetWidth()/2, ofGetHeight()/2);
+//        fbo.draw(-ofGetWidth()/2,-ofGetHeight()/2);
+//    ofPopMatrix();
+//
+//    // build frame
+//    ofSetColor(borderClr);
+//    float borderW = ofGetWidth() * (2.0/30.0);
+//    ofDrawRectangle(0, 0, ofGetWidth(), borderW);
+//    ofDrawRectangle(0, ofGetHeight()-borderW, ofGetWidth(), ofGetHeight());
+//    ofDrawRectangle(0, borderW, borderW, ofGetHeight()-borderW);
+//    ofDrawRectangle(ofGetWidth()-borderW, borderW, borderW, ofGetHeight()-borderW);
+//
     
     // draw grid
     
@@ -134,7 +167,7 @@ void ofApp::draw(){
     //    }
     //
     
-    // take a screenshot on run 
+    // take a screenshot on run
     screenshot.run();
 }
 
@@ -189,6 +222,6 @@ void ofApp::gotMessage(ofMessage msg){
 }
 
 //--------------------------------------------------------------
-void ofApp::dragEvent(ofDragInfo dragInfo){ 
+void ofApp::dragEvent(ofDragInfo dragInfo){
     
 }

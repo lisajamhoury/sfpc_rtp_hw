@@ -5,18 +5,16 @@ void ofApp::setup(){
     int w    = 200;
     int h    = 200;
     
-//    typeClr3 = ofColor(54, 20, 65); // purple
-//    typeClr2 = ofColor(1, 74, 24); // green
-//    typeClr1 = ofColor(205, 43, 22); // red
+
 
 
     ofPixels red, green;
     red.allocate(w, h, OF_IMAGE_COLOR_ALPHA);
-    red.setColor(ofColor(1, 74, 24));
+    red.setColor(ofColor(0, 72, 23)); // green
 //    red.setColor(ofColor::red);
     
     green.allocate(w, h, OF_IMAGE_COLOR_ALPHA);
-    green.setColor(ofColor(205, 43, 22));
+    green.setColor(ofColor(229, 52, 31)); // red
 //    green.setColor(ofColor::green);
 
     img1.setFromPixels(red);
