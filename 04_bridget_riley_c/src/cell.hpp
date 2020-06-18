@@ -16,7 +16,7 @@ class Cell {
 public:
     void setup(float _x, float _y, float _w, float _h, float _xOff, bool _dS);
     
-    void update();
+    void update(float _xOff);
     
     void draw();
     

@@ -3,20 +3,22 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
     ofSetWindowShape(600, 600);
-    
+    ofEnableAntiAliasing();
     guiShow = false;
     
     gui.setup();
     gui.add(powAmt.setup("pow amt", 1.45, 0.01, 10.0));
-    
+    gui.add(sinAmt.setup("sin amt", 0.25, -5.0, 5.0)); // 0.17
+    gui.add(wAmt.setup("w amt", 0.725, 0.0, 5.0));
+        
     rows = 34;
     columns = 13;
     
     float borderW = ofGetWidth() * 0.10;
     float innerW = ofGetWidth()- (borderW*2);
     
-    float w = innerW / columns;
-    float h = innerW / rows;
+    w = innerW / columns;
+    h = innerW / rows;
         
     for (int i = 0; i < rows; i++){
         for (int j = 0; j < columns; j++){
@@ -58,7 +60,7 @@ void ofApp::setup(){
             }
             
             // calculate x position of top of triangle
-            float sinAmt = mouseX*0.01;
+            float sinAmt = 0.03;
             float xOffset = ofMap(sin(i*sinAmt), -1,1,0,w);
             
             // create a new cell, add to array
@@ -68,10 +70,6 @@ void ofApp::setup(){
             newCell1.setup(x, y, w, h, xOffset, drawShape);
             cells[arrayIndex1] = newCell1;
 
-//          int arrayIndex2 = (rows * columns) - arrayIndex1 - 1;
-//          Cell newCell2;
-//          newCell2.setup(x, ofGetHeight()-y-h, w, h, !drawShape);
-//          cells[arrayIndex2] = newCell2;
             
         }
     }
@@ -89,40 +87,21 @@ void ofApp::draw(){
     
     
     ofBackground(255);
-    
-    
-    
-    
-    
-    //    cout << counter << endl;
-    
-    // can't use cells.size here?
-    //442
-    
-    int cellsSize = 442;
-    
+        
+   
     for (int i = 0; i < rows; i++){
         for (int j = 0; j < columns; j++){
-            
-//            float yPct = ofMap(i, 0, rows, 0, 1);
-//            yPct = powf(yPct, powAmt);
-//            float x = ofMap(yPct, 0, 1, 0, s)
+
+            cout << wAmt << endl;
+            float xOffset = ofMap(sin(i*sinAmt), -1,1,0,w*wAmt);
             
             int arrayIndex1 = (columns*i)+j;
-            cells[arrayIndex1].update();
+            cells[arrayIndex1].update(xOffset);
             cells[arrayIndex1].draw();
             
         }
     }
-    
-    //    for (int i = 0; i < cellsSize; i++) {
-    
-    
-    
-    //    }
-    
-    
-    
+      
     
     screenshot.run();
     
@@ -136,6 +115,15 @@ void ofApp::draw(){
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
+    
+        if (key == OF_KEY_RETURN) {
+            screenshot.take();
+        std::cout << "return pressed" << endl;
+    }
+    
+    if(key == 'h'){
+        guiShow = !guiShow;
+    }
     
 }
 

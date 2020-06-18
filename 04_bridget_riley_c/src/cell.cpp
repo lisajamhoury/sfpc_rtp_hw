@@ -29,24 +29,14 @@ void Cell::setup(float _x, float _y, float _w, float _h, float _xOff, bool _dS) 
     drawShape = _dS;
 
     xOff = _xOff;
-    v5.x += xOff;
+    v5.x = x + xOff;
     v5.y = y;
     
 }
 
-void Cell::update() {
+void Cell::update(float _xOff) {
     
-//    float distance = v1.distance(v2);
-//    v5.x = x + (distance/2);
-//    v5.x += xOff;
-//    v5.y = y;
-        
-//    float borderW = ofGetWidth() * 0.10;
-//    float innerW = ofGetWidth()- (borderW*2);
-//    float
-
-    
-    
+      v5.x = x + _xOff;
 }
 
 void Cell::draw() {

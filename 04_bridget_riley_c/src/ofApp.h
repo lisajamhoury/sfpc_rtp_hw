@@ -29,9 +29,13 @@ public:
     bool guiShow;
     ofxPanel gui;
     ofxFloatSlider powAmt;
+    ofxFloatSlider sinAmt;
+    ofxFloatSlider wAmt;
     
     int rows;
     int columns;
+    float w;
+    float h;
     Cell cells[442];
     
 };
